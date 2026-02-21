@@ -72,5 +72,5 @@ done
 %{_datadir}/cups/model/uld-xerox
 
 %changelog
-* Sat Jan 29 2026 Nikita Leshenko <nikita@leshenko.net>
+* Thu Jan 29 2026 Nikita Leshenko <nikita@leshenko.net>
 - Initial RPM package for Fedora

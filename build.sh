@@ -2,15 +2,14 @@
 
 set -e
 
-rpmdev-setuptree
+rm -rf out/RPMS
+rm -f out/rpms.tar.gz
 
-cp *.spec ~/rpmbuild/SPECS/
 # Download sources
-spectool -g -R ~/rpmbuild/SPECS/*.spec
+spectool --define "_topdir %(pwd)/out" -g -R *.spec
 # Build RPM
-rpmbuild --target x86_64 -bb ~/rpmbuild/SPECS/*.spec
-rpmbuild --target i686 -bb ~/rpmbuild/SPECS/*.spec
-rpmbuild --target armv7hl -bb ~/rpmbuild/SPECS/*.spec
+rpmbuild --define "_topdir %(pwd)/out" --target x86_64 -ba *.spec
+rpmbuild --define "_topdir %(pwd)/out" --target i686 -ba *.spec
+rpmbuild --define "_topdir %(pwd)/out" --target armv7hl -ba *.spec
 
-cp -r ~/rpmbuild/RPMS/* out/
-tar -czf out/rpms.tar.gz -C out/ x86_64 i686 armv7hl
+tar -czf out/rpms.tar.gz -C out/RPMS .
